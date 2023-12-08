@@ -1,49 +1,28 @@
-<!-- 开关：允许在script中写组合式API -->
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script>
+export default {
+    setup() {
+        console.log('setup', this)
+
+        const message = 'this is message'
+        const logMessage = () => {
+            console.log(message)
+        }
+
+        return {
+            message,
+            logMessage
+        }
+    },
+    beforeCreate() {
+        console.log('beforeCreate')
+    }
+}
+
 </script>
 
 <template>
-<!--  不再要求唯一的根元素  -->
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div>
+      {{message}}
+      <button @click="logMessage"> log </button>
+  </div>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
